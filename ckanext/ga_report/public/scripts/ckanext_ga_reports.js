@@ -14,11 +14,11 @@ CKAN.GA_Reports.render_rickshaw = function( css_name, data, mode, colorscheme ) 
     }
 
     if (!Modernizr.svg) {
-        renderError('','Your browser does not support vector graphics. No graphs can be rendered.','(Graph cannot be rendered)');
+        renderError('','Teie brauser ei toeta vektorgraafikat.Graafikut ei saa kuvada.','(Graafikut ei saa kuvada)');
         return;
     }
     if (data.length==0) {
-        renderError('alert-info','There is not enough data to render a graph.','(No graph available)');
+        renderError('alert-info','Graafiku kuvamiseks pole piisavalt andmeid.','(Graafik pole saadaval)');
         return
     }
     var myLegend = $('<div id="legend_'+css_name+'"/>').appendTo(graphLegends);
@@ -38,8 +38,8 @@ CKAN.GA_Reports.render_rickshaw = function( css_name, data, mode, colorscheme ) 
         series: data ,
         height: 328
     });
-    var x_axis = new Rickshaw.Graph.Axis.Time( { 
-        graph: graph 
+    var x_axis = new Rickshaw.Graph.Axis.Time( {
+        graph: graph
     } );
     var y_axis = new Rickshaw.Graph.Axis.Y( {
         graph: graph,
@@ -55,19 +55,19 @@ CKAN.GA_Reports.render_rickshaw = function( css_name, data, mode, colorscheme ) 
       graph: graph,
       legend: legend
     } );
-    myLegend.prepend('<div class="instructions">Click on a series below to isolate its graph:</div>');
+    myLegend.prepend('<div class="instructions">Kliki all olevale seeriale tema graafiku isoleerimiseks:</div>');
     graph.render();
 };
 
 CKAN.GA_Reports.bind_sparklines = function() {
-  /* 
-   * Bind to the 'totals' tab being on screen, when the 
+  /*
+   * Bind to the 'totals' tab being on screen, when the
    * Sparkline graphs should be drawn.
    * Note that they cannot be drawn sooner.
    */
   var created = false;
   $('a[href="#totals"]').on(
-    'shown', 
+    'shown',
       function() {
         if (!created) {
           var sparkOptions = {
@@ -92,9 +92,9 @@ CKAN.GA_Reports.bind_sparklines = function() {
 };
 
 CKAN.GA_Reports.bind_sidebar = function() {
-  /* 
-   * Bind to changes in the tab behaviour: 
-   * Show the correct rickshaw graph in the sidebar. 
+  /*
+   * Bind to changes in the tab behaviour:
+   * Show the correct rickshaw graph in the sidebar.
    * Not to be called before all graphs load.
    */
   $('a[data-toggle="tab"]').on(
@@ -119,7 +119,7 @@ CKAN.GA_Reports.bind_sidebar = function() {
 };
 
 CKAN.GA_Reports.bind_month_selector = function() {
-  var handler = function(e) { 
+  var handler = function(e) {
     var target = $(e.delegateTarget);
     var form = target.closest('form');
     var url = form.attr('action')+'?month='+target.val()+window.location.hash;
