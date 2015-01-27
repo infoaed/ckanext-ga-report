@@ -298,8 +298,8 @@ class DownloadAnalytics(object):
             results = dict(url=[])
 
         result_data = results.get('rows', [])
-        ga_model.update_sitewide_stats(period_name, "Totals", {'Total page views': result_data[0][0]},
-            period_complete_day)
+        if (len(result_data) > 0):
+            ga_model.update_sitewide_stats(period_name, "Totals", {'Total page views': result_data[0][0]}, period_complete_day)
 
         try:
             # Because of issues of invalid responses, we are going to make these requests
@@ -320,13 +320,15 @@ class DownloadAnalytics(object):
             log.exception(e)
             results = dict(url=[])
 
+        data = {}
         result_data = results.get('rows', [])
-        data = {
-            'Pages per visit': result_data[0][0],
-            'Average time on site': result_data[0][1],
-            'New visits': result_data[0][2],
-            'Total visits': result_data[0][3],
-        }
+        if len(result_data) > 0:
+            data = {
+                'Pages per visit': result_data[0][0],
+                'Average time on site': result_data[0][1],
+                'New visits': result_data[0][2],
+                'Total visits': result_data[0][3],
+            }
         ga_model.update_sitewide_stats(period_name, "Totals", data, period_complete_day)
 
         # Bounces from / or another configurable page.
