@@ -211,8 +211,8 @@ class DownloadAnalytics(object):
             return dict(url=[])
 
         packages = []
-        log.info("There are %d results" % results['totalResults'])
-        for entry in results.get('rows'):
+        log.info('There are %d results', results['totalResults'])
+        for entry in results.get('rows', []):
             (loc,pageviews,visits) = entry
             url = _normalize_url('http:/' + loc) # strips off domain e.g. www.data.gov.uk or data.gov.uk
 
@@ -297,7 +297,7 @@ class DownloadAnalytics(object):
             log.exception(e)
             results = dict(url=[])
 
-        result_data = results.get('rows')
+        result_data = results.get('rows', [])
         ga_model.update_sitewide_stats(period_name, "Totals", {'Total page views': result_data[0][0]},
             period_complete_day)
 
@@ -320,7 +320,7 @@ class DownloadAnalytics(object):
             log.exception(e)
             results = dict(url=[])
 
-        result_data = results.get('rows')
+        result_data = results.get('rows', [])
         data = {
             'Pages per visit': result_data[0][0],
             'Average time on site': result_data[0][1],
@@ -391,7 +391,7 @@ class DownloadAnalytics(object):
             log.exception(e)
             results = dict(url=[])
 
-        result_data = results.get('rows')
+        result_data = results.get('rows', [])
         data = {}
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
@@ -432,7 +432,7 @@ class DownloadAnalytics(object):
             log.exception(e)
             results = dict(url=[])
 
-        result_data = results.get('rows')
+        result_data = results.get('rows',[])
         if not result_data:
             # We may not have data for this time period, so we need to bail
             # early.
@@ -516,7 +516,7 @@ class DownloadAnalytics(object):
             log.exception(e)
             results = dict(url=[])
 
-        result_data = results.get('rows')
+        result_data = results.get('rows', [])
         data = {}
         for result in result_data:
             if not result[0] == '(not set)':
@@ -545,7 +545,7 @@ class DownloadAnalytics(object):
             log.exception(e)
             results = dict(url=[])
 
-        result_data = results.get('rows')
+        result_data = results.get('rows', [])
         data = {}
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
@@ -583,7 +583,7 @@ class DownloadAnalytics(object):
             results = dict(url=[])
 
 
-        result_data = results.get('rows')
+        result_data = results.get('rows', [])
         # e.g. [u'Firefox', u'19.0', u'20']
 
         data = {}
@@ -643,7 +643,7 @@ class DownloadAnalytics(object):
             results = dict(url=[])
 
 
-        result_data = results.get('rows')
+        result_data = results.get('rows', [])
         data = {}
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
