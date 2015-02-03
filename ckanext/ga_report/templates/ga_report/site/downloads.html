@@ -5,13 +5,13 @@
 
   <xi:include href="../ga_util.html" />
 
-  <py:def function="page_title">Downloads</py:def>
+  <py:def function="page_title">Alla laadimised</py:def>
 
   <py:def path="sidebar">
     ${ga_sidebar(download_link=h.url_for(controller='ckanext.ga_report.controller:GaReport',action='csv_downloads',month=c.month or 'all'))}
   </py:def>
 
-  <py:def function="page_heading">Downloads ${usage_nav('Downloads')}</py:def>
+  <py:def function="page_heading">Alla laadimised ${usage_nav('Downloads')}</py:def>
   <div py:match="content">
 
     <div class="boxed">
@@ -29,8 +29,8 @@
          ${downloads_table(c.downloads)}
        </py:if>
        <py:if test="not c.downloads">
-         <h4>No data</h4>
-         <p>There is no download data available for this month</p>
+         <h4>Andmed puuduvad</h4>
+         <p>Sellel kuule alla laadimiste andmed puuduvad.</p>
        </py:if>
      </div>
   </div>

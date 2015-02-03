@@ -28,7 +28,7 @@
     <div class="row">
       <div class="col-sm-7 col-md-8 col-lg-9">
         <py:with vars="download_link=h.url_for(controller='ckanext.ga_report.controller:GaReport',action='csv',month=c.month or 'all')">
-          <a class="btn button btn-primary btn-sm pull-right" href="${download_link}"><i class="icon-download"></i>&nbsp; Lae alla CSV</a>
+          <a class="btn button btn-primary btn-sm pull-right" href="${download_link}"><i class="icon-download"></i>&nbsp; Laadi alla CSV</a>
         </py:with>
         <h1>Portaali kasutus</h1>
       </div>
@@ -50,7 +50,7 @@
         <div class="whitebox">
           <strong>Graafiku legend</strong>
           <div id="graph-legend-container">
-            <div style="display: none;" id="legend_none">(Graafikut pole laetud)</div>
+            <div style="display: none;" id="legend_none">(Graafikut pole laaditud)</div>
           </div>
         </div>
       </div>
