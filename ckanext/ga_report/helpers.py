@@ -162,12 +162,12 @@ def stat_name_translation(stat_name):
         if stat_name == 'Total page views':
             result = 'Kokku lehtede vaatamisi'
         if stat_name == 'Total visits':
-            result = 'Kokku külastusi'
+            result = u'Kokku külastusi'
         if stat_name == 'Pages per visit':
-            result = 'Lehti külastuse kohta'
+            result = u'Lehti külastuse kohta'
         if stat_name == 'Average time on site':
             result = 'Saidil keskmiselt veedetud aeg'
         if stat_name == 'New visits':
-            result = 'Uusi külastajaid'
+            result = u'Uusi külastajaid'
 
     return result
