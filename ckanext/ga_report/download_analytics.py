@@ -121,13 +121,13 @@ class DownloadAnalytics(object):
                 accountName = config.get('googleanalytics.account')
 
                 log.info('Downloading analytics for dataset views')
-                data = self.download(start_date, end_date, '~/%s/dataset/[a-z0-9-_]+' % accountName)
+                data = self.download(start_date, end_date, '~/dataset/[a-z0-9-_]+')
 
                 log.info('Storing dataset views (%i rows)', len(data.get('url')))
                 self.store(period_name, period_complete_day, data, )
 
                 log.info('Downloading analytics for publisher views')
-                data = self.download(start_date, end_date, '~/%s/publisher/[a-z0-9-_]+' % accountName)
+                data = self.download(start_date, end_date, '~/publisher/[a-z0-9-_]+')
 
                 log.info('Storing publisher views (%i rows)', len(data.get('url')))
                 self.store(period_name, period_complete_day, data,)
@@ -214,7 +214,10 @@ class DownloadAnalytics(object):
         log.info('There are %d results', results['totalResults'])
         for entry in results.get('rows', []):
             (loc,pageviews,visits) = entry
-            url = _normalize_url('http:/' + loc) # strips off domain e.g. www.data.gov.uk or data.gov.uk
+            url = loc
+            if not url.startswith('/dataset/') and not url.startswith('/publisher/'):
+                url = _normalize_url('http:/' + loc) # strips off domain e.g. www.data.gov.uk or data.gov.uk
+
 
             if not url.startswith('/dataset/') and not url.startswith('/publisher/'):
                 # filter out strays like:
@@ -397,13 +400,13 @@ class DownloadAnalytics(object):
         data = {}
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
-        self._filter_out_long_tail(data, MIN_VIEWS)
+        #self._filter_out_long_tail(data, MIN_VIEWS)
         ga_model.update_sitewide_stats(period_name, "Languages", data, period_complete_day)
 
         data = {}
         for result in result_data:
             data[result[1]] = data.get(result[1], 0) + int(result[2])
-        self._filter_out_long_tail(data, MIN_VIEWS)
+        #self._filter_out_long_tail(data, MIN_VIEWS)
         ga_model.update_sitewide_stats(period_name, "Country", data, period_complete_day)
 
 
@@ -551,7 +554,7 @@ class DownloadAnalytics(object):
         data = {}
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
-        self._filter_out_long_tail(data, MIN_VIEWS)
+        #self._filter_out_long_tail(data, MIN_VIEWS)
         ga_model.update_sitewide_stats(period_name, "Operating Systems", data, period_complete_day)
 
         data = {}
@@ -591,14 +594,14 @@ class DownloadAnalytics(object):
         data = {}
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
-        self._filter_out_long_tail(data, MIN_VIEWS)
+        #self._filter_out_long_tail(data, MIN_VIEWS)
         ga_model.update_sitewide_stats(period_name, "Browsers", data, period_complete_day)
 
         data = {}
         for result in result_data:
             key = "%s %s" % (result[0], self._filter_browser_version(result[0], result[1]))
             data[key] = data.get(key, 0) + int(result[2])
-        self._filter_out_long_tail(data, MIN_VIEWS)
+        #self._filter_out_long_tail(data, MIN_VIEWS)
         ga_model.update_sitewide_stats(period_name, "Browser versions", data, period_complete_day)
 
     @classmethod
@@ -649,13 +652,13 @@ class DownloadAnalytics(object):
         data = {}
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
-        self._filter_out_long_tail(data, MIN_VIEWS)
+        #self._filter_out_long_tail(data, MIN_VIEWS)
         ga_model.update_sitewide_stats(period_name, "Mobile brands", data, period_complete_day)
 
         data = {}
         for result in result_data:
             data[result[1]] = data.get(result[1], 0) + int(result[2])
-        self._filter_out_long_tail(data, MIN_VIEWS)
+        #self._filter_out_long_tail(data, MIN_VIEWS)
         ga_model.update_sitewide_stats(period_name, "Mobile devices", data, period_complete_day)
 
     @classmethod
