@@ -1,5 +1,8 @@
+﻿# -*- coding: utf-8 -*-
+
 import logging
 import operator
+import re
 
 import ckan.lib.base as base
 import ckan.model as model
@@ -136,8 +139,20 @@ def month_option_title(month_iso, months, day):
         _log.error('Month "%s" not found in list of months.' % month_iso)
         return month_iso
     month_name = months[index][1]
+
+    month_name = month_name.replace('January', 'Jaanuar')
+    month_name = month_name.replace('February', 'Veebruar')
+    month_name = month_name.replace('March', 'Märts')
+    month_name = month_name.replace('April', 'Aprill')
+    month_name = month_name.replace('May', 'Mai')
+    month_name = month_name.replace('June', 'Juuni')
+    month_name = month_name.replace('July', 'Juuli')
+    month_name = month_name.replace('October', 'Oktoober')
+    month_name = month_name.replace('December', 'Detsember')
+
+    day = re.sub("[^0-9]", "", day)
     if index==0:
-        return month_name + (' (up to %s)'%day)
+        return month_name + (' (k.a %s.)' % day)
     return month_name
 
 
