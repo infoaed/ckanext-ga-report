@@ -335,8 +335,7 @@ class DownloadAnalytics(object):
         ga_model.update_sitewide_stats(period_name, "Totals", data, period_complete_day)
 
         # Bounces from / or another configurable page.
-        path = '/%s%s' % (config.get('googleanalytics.account'),
-                          config.get('ga-report.bounce_url', '/'))
+        path = '%s' % (config.get('ga-report.bounce_url', '/'))
 
         try:
             # Because of issues of invalid responses, we are going to make these requests
