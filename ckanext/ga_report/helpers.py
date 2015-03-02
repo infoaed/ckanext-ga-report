@@ -142,7 +142,7 @@ def month_option_title(month_iso, months, day):
 
     month_name = month_name.replace('January', 'Jaanuar')
     month_name = month_name.replace('February', 'Veebruar')
-    month_name = month_name.replace('March', 'Märts')
+    month_name = month_name.replace('March', u'Märts')
     month_name = month_name.replace('April', 'Aprill')
     month_name = month_name.replace('May', 'Mai')
     month_name = month_name.replace('June', 'Juuni')
