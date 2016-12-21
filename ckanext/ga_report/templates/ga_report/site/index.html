@@ -1,4 +1,4 @@
-c<html xmlns:py="http://genshi.edgewall.org/" xmlns:i18n="http://genshi.edgewall.org/i18n" xmlns:xi="http://www.w3.org/2001/XInclude" py:strip="">
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:i18n="http://genshi.edgewall.org/i18n" xmlns:xi="http://www.w3.org/2001/XInclude" py:strip="">
 
   <xi:include href="../ga_util.html"/>
 
@@ -150,7 +150,7 @@ c<html xmlns:py="http://genshi.edgewall.org/" xmlns:i18n="http://genshi.edgewall
                    <hr/>
                   <p>Percentage of visits that were referred from these social networks</p>
                    <form class="form-inline" action="${h.url_for(controller='ckanext.ga_report.controller:GaReport',action='index')}" method="get">
-                     <h4 class="ga-reports-heading">Show stats table for:
+                     <h4 class="ga-reports-heading">Show stats table for:</h4>
                      ${month_selector(c.month, c.months, c.day)}
                    </form>
                 <hr/>
