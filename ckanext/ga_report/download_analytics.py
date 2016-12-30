@@ -11,8 +11,6 @@ import ga_model
 
 #from ga_client import GA
 
-from ckan.lib.base import _
-
 log = logging.getLogger('ckanext.ga-report')
 
 FORMAT_MONTH = '%Y-%m'
@@ -304,7 +302,7 @@ class DownloadAnalytics(object):
 
         result_data = results.get('rows', [])
         if (len(result_data) > 0):
-            ga_model.update_sitewide_stats(period_name, _("Totals"), {_('Total page views'): result_data[0][0]}, period_complete_day)
+            ga_model.update_sitewide_stats(period_name, "Totals", {'Total page views': result_data[0][0]}, period_complete_day)
 
         try:
             # Because of issues of invalid responses, we are going to make these requests
@@ -329,12 +327,12 @@ class DownloadAnalytics(object):
         result_data = results.get('rows', [])
         if len(result_data) > 0:
             data = {
-                _('Pages per visit'): result_data[0][0],
-                _('Average time on site'): result_data[0][1],
-                _('New visits'): result_data[0][2],
-                _('Total visits'): result_data[0][3],
+                'Pages per visit': result_data[0][0],
+                'Average time on site': result_data[0][1],
+                'New visits': result_data[0][2],
+                'Total visits': result_data[0][3],
             }
-        ga_model.update_sitewide_stats(period_name, _("Totals"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Totals", data, period_complete_day)
 
         # Bounces from / or another configurable page.
         path = '%s' % (config.get('ga-report.bounce_url', '/'))
@@ -369,7 +367,7 @@ class DownloadAnalytics(object):
         bounces = float(results[1])
         # visitBounceRate is already a %
         log.info('Google reports visitBounceRate as %s', bounces)
-        ga_model.update_sitewide_stats(period_name, _("Totals"), {_('Bounce rate (home page)'): float(bounces)},
+        ga_model.update_sitewide_stats(period_name, "Totals", {'Bounce rate (home page)': float(bounces)},
             period_complete_day)
 
 
@@ -402,13 +400,13 @@ class DownloadAnalytics(object):
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
         #self._filter_out_long_tail(data, MIN_VIEWS)
-        ga_model.update_sitewide_stats(period_name, _("Languages"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Languages", data, period_complete_day)
 
         data = {}
         for result in result_data:
             data[result[1]] = data.get(result[1], 0) + int(result[2])
         #self._filter_out_long_tail(data, MIN_VIEWS)
-        ga_model.update_sitewide_stats(period_name, _("Country"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Country", data, period_complete_day)
 
 
     def _download_stats(self, start_date, end_date, period_name, period_complete_day):
@@ -499,7 +497,7 @@ class DownloadAnalytics(object):
         process_result_data(results.get('rows'), cached=False)
 
         self._filter_out_long_tail(data, MIN_DOWNLOADS)
-        ga_model.update_sitewide_stats(period_name, _("Downloads"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Downloads", data, period_complete_day)
 
     def _social_stats(self, start_date, end_date, period_name, period_complete_day):
         """ Finds out which social sites people are referred from """
@@ -528,7 +526,7 @@ class DownloadAnalytics(object):
             if not result[0] == '(not set)':
                 data[result[0]] = data.get(result[0], 0) + int(result[2])
         self._filter_out_long_tail(data, 3)
-        ga_model.update_sitewide_stats(period_name, _("Social sources"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Social sources", data, period_complete_day)
 
 
     def _os_stats(self, start_date, end_date, period_name, period_complete_day):
@@ -556,14 +554,14 @@ class DownloadAnalytics(object):
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
         #self._filter_out_long_tail(data, MIN_VIEWS)
-        ga_model.update_sitewide_stats(period_name, _("Operating Systems"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Operating Systems", data, period_complete_day)
 
         data = {}
         for result in result_data:
             if int(result[2]) >= MIN_VIEWS:
                 key = "%s %s" % (result[0],result[1])
                 data[key] = result[2]
-        ga_model.update_sitewide_stats(period_name, _("Operating Systems versions"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Operating Systems versions", data, period_complete_day)
 
 
     def _browser_stats(self, start_date, end_date, period_name, period_complete_day):
@@ -596,14 +594,14 @@ class DownloadAnalytics(object):
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
         #self._filter_out_long_tail(data, MIN_VIEWS)
-        ga_model.update_sitewide_stats(period_name, _("Browsers"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Browsers", data, period_complete_day)
 
         data = {}
         for result in result_data:
             key = "%s %s" % (result[0], self._filter_browser_version(result[0], result[1]))
             data[key] = data.get(key, 0) + int(result[2])
         #self._filter_out_long_tail(data, MIN_VIEWS)
-        ga_model.update_sitewide_stats(period_name, _("Browser versions"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Browser versions", data, period_complete_day)
 
     @classmethod
     def _filter_browser_version(cls, browser, version_str):
@@ -654,13 +652,13 @@ class DownloadAnalytics(object):
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[2])
         #self._filter_out_long_tail(data, MIN_VIEWS)
-        ga_model.update_sitewide_stats(period_name, _("Mobile brands"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Mobile brands", data, period_complete_day)
 
         data = {}
         for result in result_data:
             data[result[1]] = data.get(result[1], 0) + int(result[2])
         #self._filter_out_long_tail(data, MIN_VIEWS)
-        ga_model.update_sitewide_stats(period_name, _("Mobile devices"), data, period_complete_day)
+        ga_model.update_sitewide_stats(period_name, "Mobile devices", data, period_complete_day)
 
     @classmethod
     def _filter_out_long_tail(cls, data, threshold=10):

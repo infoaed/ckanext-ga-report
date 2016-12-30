@@ -44,7 +44,7 @@
 </div>
 
 
-<table py:def="stat_table(items, title=_('Views'))" class="ga-reports-table table table-condensed table-bordered table-striped">
+<table py:def="stat_table(items, title='Vaatamisi')" class="ga-reports-table table table-condensed table-bordered table-striped">
     <tr>
         <th>Name</th>
         <th class="td-numeric">% ${title}</th>
@@ -70,5 +70,7 @@
     </div>
   </div>
 </py:def>
+
+<py:def function="stat_name_translate(stat_name)">${h.stat_name_translation(stat_name)}</py:def>
 
 </html>

@@ -8,9 +8,6 @@ import ckan.lib.base as base
 import ckan.model as model
 from ckan.logic import get_action
 
-from ckan.lib import helpers as h
-from ckan.lib.base import _
-
 from ckanext.ga_report.ga_model import GA_Url, GA_Publisher
 from ckanext.ga_report.controller import _get_publishers
 _log = logging.getLogger(__name__)
@@ -143,20 +140,34 @@ def month_option_title(month_iso, months, day):
         return month_iso
     month_name = months[index][1]
 
-    if(h.lang()=="et"):
-        month_name = month_name.replace('January', 'Jaanuar')
-        month_name = month_name.replace('February', 'Veebruar')
-        month_name = month_name.replace('March', u'Märts')
-        month_name = month_name.replace('April', 'Aprill')
-        month_name = month_name.replace('May', 'Mai')
-        month_name = month_name.replace('June', 'Juuni')
-        month_name = month_name.replace('July', 'Juuli')
-        month_name = month_name.replace('October', 'Oktoober')
-        month_name = month_name.replace('December', 'Detsember')
-    
+    month_name = month_name.replace('January', 'Jaanuar')
+    month_name = month_name.replace('February', 'Veebruar')
+    month_name = month_name.replace('March', u'Märts')
+    month_name = month_name.replace('April', 'Aprill')
+    month_name = month_name.replace('May', 'Mai')
+    month_name = month_name.replace('June', 'Juuni')
+    month_name = month_name.replace('July', 'Juuli')
+    month_name = month_name.replace('October', 'Oktoober')
+    month_name = month_name.replace('December', 'Detsember')
+
     day = re.sub("[^0-9]", "", day)
     if index==0:
-        return month_name + (_(' (up to %s)') % day)
+        return month_name + (' (k.a %s.)' % day)
     return month_name
 
+def stat_name_translation(stat_name):
 
+    result = stat_name
+    if stat_name:
+        if stat_name == 'Total page views':
+            result = 'Kokku lehtede vaatamisi'
+        if stat_name == 'Total visits':
+            result = u'Kokku külastusi'
+        if stat_name == 'Pages per visit':
+            result = u'Lehti külastuse kohta'
+        if stat_name == 'Average time on site':
+            result = 'Saidil keskmiselt veedetud aeg'
+        if stat_name == 'New visits':
+            result = u'Uusi külastajaid'
+
+    return result
