@@ -40,7 +40,8 @@ grepped_for_translation_with_gettext = [
     _("Browsers"),
     _("Browser versions"),
     _("Mobile brands"),
-    _("Mobile devices")
+    _("Mobile devices"),
+    _('not set')
 ]
 
 class DownloadAnalytics(object):
