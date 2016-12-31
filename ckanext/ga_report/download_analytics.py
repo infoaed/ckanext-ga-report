@@ -11,12 +11,37 @@ import ga_model
 
 #from ga_client import GA
 
+from ckan.lib.base import _
+
 log = logging.getLogger('ckanext.ga-report')
 
 FORMAT_MONTH = '%Y-%m'
 MIN_VIEWS = 50
 MIN_VISITS = 20
 MIN_DOWNLOADS = 10
+
+# these cannot be translated directly
+# because these are also the titles store in database
+# used as identificators to look up the data
+grepped_for_translation_with_gettext = [
+    _("Totals"),
+    _('Total page views'),
+    _('Pages per visit'),
+    _('Average time on site'),
+    _('New visits'),
+    _('Total visits'),
+    _('Bounce rate (home page)'),
+    _("Languages"),
+    _("Country"),
+    _("Downloads"),
+    _("Social sources"),
+    _("Operating Systems"),
+    _("Operating Systems versions"),
+    _("Browsers"),
+    _("Browser versions"),
+    _("Mobile brands"),
+    _("Mobile devices")
+]
 
 class DownloadAnalytics(object):
     '''Downloads and stores analytics info'''
@@ -97,7 +122,7 @@ class DownloadAnalytics(object):
     @staticmethod
     def get_full_period_name(period_name, period_complete_day):
         if period_complete_day:
-            return period_name + ' (up to %ith)' % period_complete_day
+            return period_name + ' ' + _('(up to %i)') % period_complete_day
         else:
             return period_name
 

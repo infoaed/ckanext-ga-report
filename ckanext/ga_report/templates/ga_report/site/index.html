@@ -85,8 +85,8 @@
                      </tr>
                       <py:for each="name, value, graph in c.global_totals">
                           <tr>
-                              <td>${stat_name_translate(name)}</td>
-                              <td class="td-numeric">${str(value).replace('seconds','sek')}</td>
+                              <td>${_(name)}</td>
+                              <td class="td-numeric">${str(value).replace(' seconds','s')}</td>
                               <td class="sparkline-cell">
                                 <span class="sparkline" sparkTooltips="${','.join([x for x,y in graph])}">
                                   ${','.join([y for x,y in graph])}

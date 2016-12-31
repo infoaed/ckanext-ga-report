@@ -14,11 +14,11 @@ CKAN.GA_Reports.render_rickshaw = function( css_name, data, mode, colorscheme ) 
     }
 
     if (!Modernizr.svg) {
-        renderError('Your browser does not support vector graphics.', '(No graphs can be rendered)');
+        renderError(__('Your browser does not support vector graphics.'), __('(No graphs can be rendered)'));
         return;
     }
     if (data.length==0) {
-        renderError('alert-info','There is not enough data to render a graph.', '(Graph not available)');
+        renderError('alert-info',__('There is not enough data to render a graph.'), __('(Graph not available)'));
         return
     }
     var myLegend = $('<div id="legend_'+css_name+'"/>').appendTo(graphLegends);
@@ -55,7 +55,7 @@ CKAN.GA_Reports.render_rickshaw = function( css_name, data, mode, colorscheme ) 
       graph: graph,
       legend: legend
     } );
-    myLegend.prepend('<div class="instructions">'+'Click on a series below to isolate its graph:'+'</div>');
+    myLegend.prepend('<div class="instructions">'+__('Click on a series below to isolate its graph:')+'</div>');
     graph.render();
 };
 

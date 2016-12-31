@@ -44,14 +44,14 @@
 </div>
 
 
-<table py:def="stat_table(items, title='Vaatamisi')" class="ga-reports-table table table-condensed table-bordered table-striped">
+<table py:def="stat_table(items, title=_('Views'))" class="ga-reports-table table table-condensed table-bordered table-striped">
     <tr>
         <th>Name</th>
         <th class="td-numeric">% ${title}</th>
     </tr>
     <py:for each="name, value in items">
     <tr>
-        <td>${name}</td>
+        <td>${_(name)}</td>
         <td class="td-numeric">${value}</td>
     </tr>
     </py:for>
@@ -70,7 +70,5 @@
     </div>
   </div>
 </py:def>
-
-<py:def function="stat_name_translate(stat_name)">${h.stat_name_translation(stat_name)}</py:def>
 
 </html>
