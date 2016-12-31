@@ -156,7 +156,7 @@ def month_option_title(month_iso, months, day):
     
     day = re.sub("[^0-9]", "", day)
     if index==0:
-        return month_name + ' ' + _('(up to %s)') % day)
+        return month_name + ' ' + _('(up to %s)') % day
     return month_name
 
 
