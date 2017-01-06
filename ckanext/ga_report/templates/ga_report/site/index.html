@@ -17,8 +17,8 @@
   </py:def>
 
  <py:match path="breadcrumbs">
-    <li><a href="/data/site-usage">Site Analytics</a></li>
-    <li><a href="/data/site-usage">Site-wide</a></li>
+    <li><a href="${h.url_for('/data/site-usage')}">Site Analytics</a></li>
+    <li><a href="${h.url_for('/data/site-usage')}">Site-wide</a></li>
   </py:match>
 
   <div py:match="content">
@@ -34,8 +34,8 @@
           <div class="panel-heading"><strong>Jump To...</strong></div>
           <div class="panel-body">
             <ul>
-              <li><a href="/data/site-usage/publisher">Publisher Usage Statistics</a></li>
-              <li><a href="/data/site-usage/dataset">Dataset Usage Statistics</a></li>
+              <li><a href="${h.url_for('/data/site-usage/publisher')}">Publisher Usage Statistics</a></li>
+              <li><a href="${h.url_for('/data/site-usage/dataset')}">Dataset Usage Statistics</a></li>
             </ul>
           </div>
         </div>

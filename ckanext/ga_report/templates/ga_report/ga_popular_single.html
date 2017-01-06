@@ -13,7 +13,7 @@
           </a>
           <h4>
             <strong>Publisher</strong> :
-            <a href="/publisher/${publisher['name']}">${publisher['title']}</a>
+            <a href="${h.url_for('/publisher/')+publisher['name']}">${publisher['title']}</a>
           </h4>
           <div>${h.truncate(dataset['notes_rendered'], length=200, whole_word=True)}</div>
     </div>
